@@ -1,6 +1,7 @@
 import socket
 import hashlib
 from threading import Thread
+import sys
 import time
 import os
 
@@ -11,7 +12,7 @@ SERVER_PORT = 5001
 # receive 4096 bytes each time
 BUFFER_SIZE = 4096
 SEPARATOR = "<SEPARATOR>"
-
+sys.setrecursionlimit(10**6)
 # create the server socket
 # TCP socket
 s = socket.socket()
@@ -33,8 +34,23 @@ def md5(filename):
     digest = md5_hash.hexdigest()
     # close the client socket
     return digest
-def merge_files(filename,list_of_files):
-    k = open('output_' + filename, 'wb')
+
+
+def merge_files(filename,list_of_files,pos):
+    k = open('output_' + filename, 'ab')
+    f = open(list_of_files[pos], 'rb')
+    data = f.read()
+    k.write(data)
+    f.close
+    k.close()
+    if (pos< len(list_of_files)-1):
+        merge_files(filename, list_of_files, pos + 1)
+        return 0
+    else:
+        return 0
+
+def merge_files_2(filename,list_of_files):
+    k = open('output_' + filename, 'ab')
     for x in list_of_files:
         f = open(x, 'rb')
         data = f.read()
@@ -46,7 +62,6 @@ def merge_files(filename,list_of_files):
 def some_function(client_socket,address,s):
     # if below code is executed, that means the sender is connected
     print(f"[+] {address} is connected.")
-    # receive the file infos
     # receive using client socket, not server socket
     received = client_socket.recv(BUFFER_SIZE).decode()
     filename, filesize, digest = received.split(SEPARATOR)
@@ -54,7 +69,6 @@ def some_function(client_socket,address,s):
 
     # remove absolute path if there is
     #filename = os.path.basename(filename)
-    # convert to integer
     filesize = int(filesize)
     files= []
 
@@ -67,15 +81,17 @@ def some_function(client_socket,address,s):
         files.append(filename_with_path+'_'+str(l))
         f.write(bytes_read[4:])
         f.close()
+    open('output_' + filename,'w').close()
 
-    k = merge_files(filename,files)
+    #merge_files(filename,files,0)
+    merge_files_2(filename, files)
 
     client_socket.close()
     output_md5 = md5('output_'+filename)
     if(digest == output_md5):
-        print('FILE DOWNLOADED CORRECTLY')
+        print(f'FILE DOWNLOADED CORRECTLY: {digest}={output_md5}')
     else:
-        print('error')
+        raise ValueError('Checksums are not correct')
 
 
 
