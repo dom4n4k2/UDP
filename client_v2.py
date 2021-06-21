@@ -32,7 +32,8 @@ print(digest)
 
 
 # send the filename and filesize
-s.send(f"{filename}{SEPARATOR}{filesize}".encode())
+s.send(f"{filename}{SEPARATOR}{filesize}{SEPARATOR}{digest}".encode())
+print('filesize',filesize)
 
 # start sending the file
 with open(filename, "rb") as f:
@@ -40,17 +41,11 @@ with open(filename, "rb") as f:
     while True:
         # read the bytes from the file
 
-        bytes_read = f.read(BUFFER_SIZE)
-        #print(len(bytes_read), start)
-        # print(len(bytes_read))
+        bytes_read = f.read(BUFFER_SIZE-4)
+        k = start.to_bytes(4, byteorder='big')
         if not bytes_read:
-            # file transmitting is done
             break
-        # we use sendall to assure transimission in
-        # busy networks
-        #s.sendto(str(start).encode(),(host,port))
-        #s.recvfrom(4096)
-        s.send(bytes_read)
+        s.send(k + bytes_read)
         start+=1
 # close the socket
 s.close()

@@ -29,38 +29,42 @@ def some_function(client_socket,address,s):
     # receive the file infos
     # receive using client socket, not server socket
     received = client_socket.recv(BUFFER_SIZE).decode()
-    filename, filesize = received.split(SEPARATOR)
-    filename  = 'temp\\'+str(address[1]) + '_'+filename
+    filename, filesize, digest = received.split(SEPARATOR)
+    filename_with_path  = 'temp\\'+str(address[1]) + '_'+filename
+    print('checksum from client',digest)
     # remove absolute path if there is
     #filename = os.path.basename(filename)
     # convert to integer
-    #filesize = int(filesize)
-    # start receiving the file from the socket
-    # and writing to the file stream
-    #with open(filename, "wb") as f:
+    filesize = int(filesize)
+    print(filesize)
     counter= 0
     print('in the loop')
+    files= []
+
     while True:
 
-        # read 1024 bytes from the socket (receive)
-        #file_chunk = client_socket.recv(BUFFER_SIZE).decode()
         bytes_read  = client_socket.recv(BUFFER_SIZE)
         if not bytes_read:
-            # nothing is received
-            # file transmitting is done
-            #s.settimeout(2)
             break
-        f = open(filename+'_'+str(counter),'wb')
-        # write to the file the bytes we just received
-        f.write(bytes_read)
+        l = int.from_bytes(bytes_read[0:4], byteorder='big')
+        f = open(filename_with_path+'_'+str(l),'wb')
+        files.append(filename_with_path+'_'+str(l))
+        f.write(bytes_read[4:])
         f.close()
-        ##s.sendto('ok'.encode(), address)
         counter +=1
-        # update the progress bar
+
+    print(files)
+
+    k = open('output_'+filename, 'wb')
+    for x in files:
+        f = open(x, 'rb')
+        data = f.read()
+        k.write(data)
+        f.close
 
     print('\n done')
     md5_hash = hashlib.md5()
-    a_file = open(filename+'_0', "rb")
+    a_file = open('output_'+filename, "rb")
     content = a_file.read()
     md5_hash.update(content)
     digest = md5_hash.hexdigest()
