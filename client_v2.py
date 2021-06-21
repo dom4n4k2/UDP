@@ -28,12 +28,10 @@ a_file = open(filename, "rb")
 content = a_file.read()
 md5_hash.update(content)
 digest = md5_hash.hexdigest()
-print(digest)
 
 
 # send the filename and filesize
 s.send(f"{filename}{SEPARATOR}{filesize}{SEPARATOR}{digest}".encode())
-print('filesize',filesize)
 
 # start sending the file
 with open(filename, "rb") as f:
@@ -47,5 +45,6 @@ with open(filename, "rb") as f:
             break
         s.send(k + bytes_read)
         start+=1
+print('SEND')
 # close the socket
 s.close()

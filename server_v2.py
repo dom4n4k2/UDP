@@ -1,6 +1,8 @@
 import socket
 import hashlib
 from threading import Thread
+import time
+import os
 
 
 # device's IP address
@@ -22,6 +24,24 @@ s.bind((SERVER_HOST, SERVER_PORT))
 s.listen(5)
 print(f"[*] Listening as {SERVER_HOST}:{SERVER_PORT}")
 
+def md5(filename):
+    md5_hash = hashlib.md5()
+    #filesize = os.path.getsize(filename)
+    a_file = open(filename, "rb")
+    content = a_file.read()
+    md5_hash.update(content)
+    digest = md5_hash.hexdigest()
+    # close the client socket
+    return digest
+def merge_files(filename,list_of_files):
+    k = open('output_' + filename, 'wb')
+    for x in list_of_files:
+        f = open(x, 'rb')
+        data = f.read()
+        k.write(data)
+        f.close
+    k.close()
+    return k
 
 def some_function(client_socket,address,s):
     # if below code is executed, that means the sender is connected
@@ -31,18 +51,14 @@ def some_function(client_socket,address,s):
     received = client_socket.recv(BUFFER_SIZE).decode()
     filename, filesize, digest = received.split(SEPARATOR)
     filename_with_path  = 'temp\\'+str(address[1]) + '_'+filename
-    print('checksum from client',digest)
+
     # remove absolute path if there is
     #filename = os.path.basename(filename)
     # convert to integer
     filesize = int(filesize)
-    print(filesize)
-    counter= 0
-    print('in the loop')
     files= []
 
     while True:
-
         bytes_read  = client_socket.recv(BUFFER_SIZE)
         if not bytes_read:
             break
@@ -51,26 +67,16 @@ def some_function(client_socket,address,s):
         files.append(filename_with_path+'_'+str(l))
         f.write(bytes_read[4:])
         f.close()
-        counter +=1
 
-    print(files)
+    k = merge_files(filename,files)
 
-    k = open('output_'+filename, 'wb')
-    for x in files:
-        f = open(x, 'rb')
-        data = f.read()
-        k.write(data)
-        f.close
-
-    print('\n done')
-    md5_hash = hashlib.md5()
-    a_file = open('output_'+filename, "rb")
-    content = a_file.read()
-    md5_hash.update(content)
-    digest = md5_hash.hexdigest()
-    print(digest)
-    # close the client socket
     client_socket.close()
+    output_md5 = md5('output_'+filename)
+    if(digest == output_md5):
+        print('FILE DOWNLOADED CORRECTLY')
+    else:
+        print('error')
+
 
 
 while True:
