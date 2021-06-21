@@ -50,7 +50,7 @@ def some_function(client_socket,address,s):
             # file transmitting is done
             #s.settimeout(2)
             break
-        f = open(filename+ '_'+str(counter),'wb')
+        f = open(filename+'_'+str(counter),'wb')
         # write to the file the bytes we just received
         f.write(bytes_read)
         f.close()
