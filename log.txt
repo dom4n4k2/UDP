@@ -1,0 +1,5 @@
+20:14:48 [+] ('192.168.1.153', 55856) is connected.20:15:59  ('192.168.1.153', 54342) is connected to the 0.0.0.0 server.20:16:35  192.168.1.153 is connected to the 0.0.0.0 server.
+20:16:50  192.168.1.153 is connected to the 0.0.0.0 server.
+20:16:57  192.168.1.153 is connected to the 0.0.0.0 server.
+21.06.2021 - 20:18:49  192.168.1.153 is connected to the 0.0.0.0 server.
+21.06.2021 - 22:07:32  192.168.1.153 is connected to the 0.0.0.0 server.

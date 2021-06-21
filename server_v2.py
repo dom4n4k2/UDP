@@ -2,6 +2,7 @@ import socket
 import hashlib
 from threading import Thread
 import sys
+from datetime import datetime
 import time
 import os
 
@@ -25,6 +26,12 @@ s.bind((SERVER_HOST, SERVER_PORT))
 s.listen(5)
 print(f"[*] Listening as {SERVER_HOST}:{SERVER_PORT}")
 
+def log_to_fille(messange):
+    now = datetime.now()
+    current_time = now.strftime("%d.%m.%Y - %H:%M:%S")
+    f= open('log.txt','a+')
+    f.write(current_time +' '+messange)
+
 def md5(filename):
     md5_hash = hashlib.md5()
     #filesize = os.path.getsize(filename)
@@ -37,7 +44,7 @@ def md5(filename):
 
 
 def merge_files(filename,list_of_files,pos):
-    k = open('output_' + filename, 'ab')
+    k = open(filename, 'ab')
     f = open(list_of_files[pos], 'rb')
     data = f.read()
     k.write(data)
@@ -50,7 +57,7 @@ def merge_files(filename,list_of_files,pos):
         return 0
 
 def merge_files_2(filename,list_of_files):
-    k = open('output_' + filename, 'ab')
+    k = open(filename, 'ab')
     for x in list_of_files:
         f = open(x, 'rb')
         data = f.read()
@@ -58,10 +65,11 @@ def merge_files_2(filename,list_of_files):
         f.close
     k.close()
     return k
-
+#class server:
 def some_function(client_socket,address,s):
     # if below code is executed, that means the sender is connected
-    print(f"[+] {address} is connected.")
+    print(f"[+] {address} is connected to the .")
+    log_to_fille(f" {address[0]} is connected to the {SERVER_HOST} server.\n")
     # receive using client socket, not server socket
     received = client_socket.recv(BUFFER_SIZE).decode()
     filename, filesize, digest = received.split(SEPARATOR)
@@ -81,18 +89,18 @@ def some_function(client_socket,address,s):
         files.append(filename_with_path+'_'+str(l))
         f.write(bytes_read[4:])
         f.close()
-    open('output_' + filename,'w').close()
-
-    #merge_files(filename,files,0)
-    merge_files_2(filename, files)
+    output_filename = 'output_' + filename
+    open(output_filename,'w').close()
+    #merge_files(output_filename,files,0)
+    merge_files_2(output_filename, files)
 
     client_socket.close()
     output_md5 = md5('output_'+filename)
+
     if(digest == output_md5):
         print(f'FILE DOWNLOADED CORRECTLY: {digest}={output_md5}')
     else:
         raise ValueError('Checksums are not correct')
-
 
 
 while True:
