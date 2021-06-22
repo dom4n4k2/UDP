@@ -1,73 +1,12 @@
-22.06.2021 - 19:50:23  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 19:50:25  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 19:50:28  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 19:50:28  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 19:51:11  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 19:51:12  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 19:51:12  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 19:51:12  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 19:51:30  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 19:51:33  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 19:56:49  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 19:56:52  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 19:59:40  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 20:00:28  192.168.1.153 is connected to the server_v2.py server.
-22.06.2021 - 20:10:57  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 20:11:00  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 20:27:09  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 20:27:16  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 20:29:17  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 20:29:34  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 20:31:49  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 21:58:52  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 22:05:33  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:11:04  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 22:12:10  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 22:12:30  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 22:13:16  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 22:13:19  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 22:14:02  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 22:14:11  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 22:14:57  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 22:15:21  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 22:15:54  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 22:15:57  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 22:16:00  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 22:16:27  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 22:17:05  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 22:17:35  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 22:18:20  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 22:18:52  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 22:19:13  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 22:19:36  192.168.1.153 is connected to the 0.0.0.0 server.
-22.06.2021 - 22:21:08  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:23:14  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:30:51  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:31:32  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:32:31  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:32:49  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:33:07  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:33:24  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:35:54  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:36:35  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:36:49  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:36:53  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:41:00  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:41:04  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:41:52  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:41:55  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:41:57  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:41:59  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:42:01  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:42:02  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:42:04  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:42:06  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:42:08  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:42:10  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:42:11  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:42:13  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:42:15  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:44:29  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:44:46  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:46:42  192.168.1.153 is connected to the 192.168.1.153 server.
-22.06.2021 - 22:47:44  192.168.1.153 is connected to the 192.168.1.153 server.
+22.06.2021 - 23:49:14  |||| Cleaning temp folder 
+22.06.2021 - 23:49:14  |||| Server is listening as 192.168.1.153:5001
+22.06.2021 - 23:49:19  |||| Client 192.168.1.153:5001 is connecting to the server 192.168.1.153:5001
+22.06.2021 - 23:49:19  |||| Client  number 1 STARTS
+ is CONNECTED to the server 192.168.1.153:5001
+22.06.2021 - 23:49:19  |||| Client 192.168.1.153:5001 is sending file input_files\randomdata with size 1048576 and checkum md5 72160ed350ecad3f8fddff781a98368f to the 192.168.1.153:5001 server.
+22.06.2021 - 23:49:19  |||| Server 192.168.1.153:5001 try to recive file: randomdata with size 1048576bytes and checksum md5 72160ed350ecad3f8fddff781a98368f from  192.168.1.153:64373 client.
+22.06.2021 - 23:49:45  |||| Client 192.168.1.153:5001 send file input_files\randomdata in 257 parts.
+22.06.2021 - 23:49:45  |||| Server 192.168.1.153:5001 recived file randomdata in 257 parts.
+22.06.2021 - 23:49:45  |||| Server 192.168.1.153:5001 merge recived file into output_files\output_randomdata.
+22.06.2021 - 23:49:45  |||| Server 192.168.1.153:5001 merged recived files into output_files\output_randomdata with 257 parts.
+22.06.2021 - 23:49:45  |||| Server 192.168.1.153:5001 downloaded file output_files\output_randomdata from client corectly. SERVER: 72160ed350ecad3f8fddff781a98368f is equal to CLIENT: 72160ed350ecad3f8fddff781a98368f
