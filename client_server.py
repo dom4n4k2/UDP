@@ -3,20 +3,50 @@ import hashlib
 import sys
 from threading import Thread
 from datetime import datetime
+import os
+import time
 
 
 class configure_server:
-    def __init__(self, host='0.0.0.0', port=5001):
+
+    def __init__(self, host='192.168.1.153', port=5001, mode = 'server', file = 'newfile'):
         self.SERVER_HOST = str(host)
         self.SERVER_PORT = int(port)
         self.BUFFER_SIZE = 4096
         self.SEPARATOR = "<SEPARATOR>"
         self.s = socket.socket()
-        print(self.SERVER_HOST, self.SERVER_PORT)
-        self.s.bind((self.SERVER_HOST, self.SERVER_PORT))
-        self.s.listen(5)
-        print(f"[*] Listening as {self.SERVER_HOST}:{self.SERVER_PORT}")
+        if(mode == 'server'):
+            self.s.bind((self.SERVER_HOST, self.SERVER_PORT))
+            self.s.listen(5)
+            print(f"[*] Listening as {self.SERVER_HOST}:{self.SERVER_PORT}")
+        if(mode =='client'):
+            self.filename = file
+            self.filesize = os.path.getsize(self.filename)
+            self.s = socket.socket()
+            print(f"[+] Connecting to {host}:{port}")
+            self.s.connect((host, port))
+            print("[+] Connected.")
 
+class client(configure_server):
+
+    def run(self):
+
+        digest = hash_check.md5(self,self.filename,mode = 'client')
+        print(digest)
+        self.s.send(f"{self.filename}{self.SEPARATOR}{self.filesize}{self.SEPARATOR}{digest}".encode())
+        with open(self.filename, "rb") as f:
+            start = 0
+            while True:
+                bytes_read = f.read(self.BUFFER_SIZE - 4)
+                k = start.to_bytes(4, byteorder='big')
+                l = int.from_bytes(k, byteorder='big')
+                if not bytes_read:
+                    break
+                time.sleep(0.1)
+                self.s.send(k + bytes_read)
+                start += 1
+        print('SEND')
+        self.s.close()
 
 class server(configure_server):
 
@@ -43,10 +73,10 @@ class server(configure_server):
             f.close()
 
         self.output_filename = 'output_' + filename
-        open(self.output_filename, 'w').close()
         client_socket.close()
-        merge_files_2.merge(self)
-        hash_check.md5(self)
+        open(self.output_filename, 'w').close() #cleanign output filename
+        merge_files_2.merge(self) #updating output filename
+        hash_check.md5(self, self.output_filename,mode = 'server')
 
 
 class merge_files_2(server):
@@ -60,25 +90,25 @@ class merge_files_2(server):
             k.write(data)
             f.close
         k.close()
-        return k
+        return filename
 
 
-class hash_check(merge_files_2):
-    def md5(self):
+class hash_check(server,client):
+    def md5(self,filename, mode):
         md5_hash = hashlib.md5()
-        a_file = open(self.output_filename, "rb")
+        a_file = open(filename, "rb")
         content = a_file.read()
         md5_hash.update(content)
-        self.digest = md5_hash.hexdigest()
-        hash_check.compare(self)
-        return
+        digest = md5_hash.hexdigest()
+        if(mode == 'server'):
+            hash_check.compare(self,digest)
+        return digest
 
-    def compare(self):
-        if (self.checksum_from_client == self.digest):
-            print(f'FILE DOWNLOADED CORRECTLY: {self.digest} is equal to {self.checksum_from_client}')
+    def compare(self,digest):
+        if (self.checksum_from_client == digest):
+            print(f'FILE DOWNLOADED CORRECTLY: {digest} is equal to {self.checksum_from_client}')
         else:
             raise ValueError(f'Checksums are not correct.')
-
 
 # class merge_files:
 #     @staticmethod
@@ -103,7 +133,6 @@ class logs:
         f = open('log.txt', 'a+')
         f.write(current_time + ' ' + messange)
 
-
 class create_thread():
     @staticmethod
     def create(clien_socket, adress):
@@ -112,21 +141,19 @@ class create_thread():
 
 
 if __name__ == "__main__":
-
-
-
     if (len(sys.argv) > 1):
         if (str(sys.argv[1]) == '-s'):
             if (len(sys.argv) == 4):
-                A = server(host=str(sys.argv[2]), port=int(sys.argv[3]))
+                A = server(host=str(sys.argv[2]), port=int(sys.argv[3]), mode ='server')
             else:
                 A = server()
             while True:
                 client_socket, address = A.accept()
                 worker = Thread(target=A.run, args=[client_socket, address], daemon=True)
                 worker.start()
-
         if (str(sys.argv[1]) == '-c'):
             print('client')
+            A = client(host=str(sys.argv[2]), port=int(sys.argv[3]), mode='client', file=str(sys.argv[4]))
+            A.run()
     else:
         print('No option choose, use parameters to set client (-c) or server (-s) mode')
