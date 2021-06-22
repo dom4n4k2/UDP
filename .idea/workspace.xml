@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="af79b1c1-a59a-431a-abd6-e500aa736442" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generator_v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/generator_v2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server_v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/server_v2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
