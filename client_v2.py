@@ -10,7 +10,7 @@ host = "192.168.1.153"
 # the port, let's use 5001
 port = 5001
 # the name of file we want to send, make sure it exists
-filename = "randomdata"
+filename = "newfile"
 # get the file size
 filesize = os.path.getsize(filename)
 
@@ -41,6 +41,8 @@ with open(filename, "rb") as f:
 
         bytes_read = f.read(BUFFER_SIZE-4)
         k = start.to_bytes(4, byteorder='big')
+        l = int.from_bytes(k, byteorder='big')
+        print(l)
         if not bytes_read:
             break
         s.send(k + bytes_read)

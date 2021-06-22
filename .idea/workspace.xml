@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="af79b1c1-a59a-431a-abd6-e500aa736442" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client_v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/client_v2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/file_generator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server_v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/server_v2.py" afterDir="false" />
     </list>
@@ -224,8 +226,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.server_v2" />
-        <item itemvalue="Python.generator_v2" />
         <item itemvalue="Python.file_generator" />
+        <item itemvalue="Python.generator_v2" />
         <item itemvalue="Python.md5" />
         <item itemvalue="Python.bytes_transfer_test" />
       </list>
