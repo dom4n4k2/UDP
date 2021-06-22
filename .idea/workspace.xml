@@ -3,13 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="af79b1c1-a59a-431a-abd6-e500aa736442" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client_v2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/client_server.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/md5.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_file" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_newfile2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_randomdata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server_v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/client_server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/newfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newfile1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newfile2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_log.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_newfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/randomdata" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

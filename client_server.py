@@ -5,11 +5,12 @@ from threading import Thread
 from datetime import datetime
 import os
 import time
+import glob
 
 
 class configure_server:
 
-    def __init__(self, host='192.168.1.153', port=5001, mode = 'server', file = 'newfile'):
+    def __init__(self, host='192.168.1.153', port=5001, mode = 'server', file = 'input_files\\'+'newfile'):
         self.SERVER_HOST = str(host)
         self.SERVER_PORT = int(port)
         self.BUFFER_SIZE = 4096
@@ -59,6 +60,7 @@ class server(configure_server):
         logs.log_to_fille(f" {address[0]} is connected to the {self.SERVER_HOST} server.\n")
         received = client_socket.recv(self.BUFFER_SIZE).decode()
         filename, filesize, self.checksum_from_client = received.split(self.SEPARATOR)
+        print(filename)
         filename_with_path = 'temp\\' + str(address[1]) + '_' + filename
         self.files = []
 
@@ -72,7 +74,7 @@ class server(configure_server):
             f.write(bytes_read[4:])
             f.close()
 
-        self.output_filename = 'output_' + filename
+        self.output_filename = 'output_files\\output_' + filename
         client_socket.close()
         open(self.output_filename, 'w').close() #cleanign output filename
         merge_files_2.merge(self) #updating output filename
@@ -139,10 +141,20 @@ class create_thread():
         serv = server()
         serv.run(clien_socket, adress)
 
+class clean_temp_folder():
+    @staticmethod
+    def clean():
+        files = glob.glob('temp/*')
+        for f in files:
+            os.remove(f)
+
 
 if __name__ == "__main__":
     if (len(sys.argv) > 1):
         if (str(sys.argv[1]) == '-s'):
+
+            clean_temp_folder.clean() #clean temp folder
+
             if (len(sys.argv) == 4):
                 A = server(host=str(sys.argv[2]), port=int(sys.argv[3]), mode ='server')
             else:
@@ -153,7 +165,7 @@ if __name__ == "__main__":
                 worker.start()
         if (str(sys.argv[1]) == '-c'):
             print('client')
-            A = client(host=str(sys.argv[2]), port=int(sys.argv[3]), mode='client', file=str(sys.argv[4]))
+            A = client(host=str(sys.argv[2]), port=int(sys.argv[3]), mode='client', file='input_files\\'+ str(sys.argv[4]))
             A.run()
     else:
         print('No option choose, use parameters to set client (-c) or server (-s) mode')
