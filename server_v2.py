@@ -1,34 +1,36 @@
 import socket
 import hashlib
-from threading import Thread
 import sys
+from threading import Thread
 from datetime import datetime
-import time
+
 
 class configure_server:
+    def __init__(self,host = '0.0.0.0', port= 5001):
+        self.SERVER_HOST = str(host)
+        self.SERVER_PORT = int(port)
+        self.BUFFER_SIZE = 4096
+        self.SEPARATOR = "<SEPARATOR>"
+        self.s = socket.socket()
+        print(self.SERVER_HOST, self.SERVER_PORT)
+        self.s.bind((self.SERVER_HOST,self.SERVER_PORT))
+        self.s.listen(5)
+        print(f"[*] Listening as {self.SERVER_HOST}:{self.SERVER_PORT}")
 
-    SERVER_HOST = "0.0.0.0"
-    SERVER_PORT = 5001
-    BUFFER_SIZE = 4096
-    SEPARATOR = "<SEPARATOR>"
-    s = socket.socket()
-    s.bind((SERVER_HOST, SERVER_PORT))
-    s.listen(5)
-    print(f"[*] Listening as {SERVER_HOST}:{SERVER_PORT}")
 
 
-class accept(configure_server):
+
+class server(configure_server):
+
     def accept(self):
         client_socket, address = self.s.accept()
         return client_socket, address
 
-class server(configure_server):
-
     def run(self, client_socket, address):
-        print(f"[+] {address} is connected to the  {configure_server.SERVER_HOST} server.")
-        logs.log_to_fille(f" {address[0]} is connected to the {configure_server.SERVER_HOST} server.\n")
-        received = client_socket.recv(configure_server.BUFFER_SIZE).decode()
-        filename, filesize, self.checksum_from_client = received.split(configure_server.SEPARATOR)
+        print(f"[+] {address} is connected to the  {self.SERVER_HOST} server.")
+        logs.log_to_fille(f" {address[0]} is connected to the {self.SERVER_HOST} server.\n")
+        received = client_socket.recv(self.BUFFER_SIZE).decode()
+        filename, filesize, self.checksum_from_client = received.split(self.SEPARATOR)
         filename_with_path = 'temp\\' + str(address[1]) + '_' + filename
 
         self.files = []
@@ -76,7 +78,7 @@ class hash_check(merge_files_2):
 
     def compare(self):
         if (self.checksum_from_client == self.digest):
-            print(f'FILE DOWNLOADED CORRECTLY: {self.digest}={self.checksum_from_client}')
+            print(f'FILE DOWNLOADED CORRECTLY: {self.digest} is equal to {self.checksum_from_client}')
         else:
             raise ValueError(f'Checksums are not correct.')
 
@@ -113,11 +115,16 @@ class create_thread():
         serv.run(clien_socket,adress)
 
 
+if __name__ == "__main__":
 
 
-accept=accept()
-while True:
-    client_socket, address = accept.accept()
-    worker = Thread(target=create_thread.create,args=[client_socket,address],daemon=True)
-    worker.start()
+    if(len(sys.argv)==3):
+        A=server(host = str(sys.argv[1]), port = int(sys.argv[2]))
+    else:
+        A=server()
+
+    while True:
+        client_socket, address = A.accept()
+        worker = Thread(target=A.run,args=[client_socket,address],daemon=True)
+        worker.start()
 
