@@ -11,7 +11,6 @@ class configure_server:
     SERVER_PORT = 5001
     BUFFER_SIZE = 4096
     SEPARATOR = "<SEPARATOR>"
-    #sys.setrecursionlimit(10**6)
     s = socket.socket()
     s.bind((SERVER_HOST, SERVER_PORT))
     s.listen(5)
@@ -38,7 +37,6 @@ class server(configure_server):
             if not bytes_read:
                 break
             l = int.from_bytes(bytes_read[0:4], byteorder='big')
-            print(l)
             f = open(filename_with_path + '_' + str(l), 'wb')
             self.files.append(filename_with_path + '_' + str(l))
             f.write(bytes_read[4:])
@@ -46,7 +44,6 @@ class server(configure_server):
 
         self.output_filename = 'output_' + filename
         open(self.output_filename, 'w').close()
-
         client_socket.close()
         merge_files_2.merge(self)
         hash_check.md5(self)
@@ -57,10 +54,8 @@ class merge_files_2(server):
     def merge(self):
         filename = self.output_filename
         list_of_files = self.files
-
         k = open(filename, 'ab')
         for x in list_of_files:
-            print(x)
             f = open(x, 'rb')
             data = f.read()
             k.write(data)
@@ -123,6 +118,6 @@ class create_thread():
 accept=accept()
 while True:
     client_socket, address = accept.accept()
-    worker = Thread(target=create_thread.create,args=[client_socket,address])
+    worker = Thread(target=create_thread.create,args=[client_socket,address],daemon=True)
     worker.start()
 

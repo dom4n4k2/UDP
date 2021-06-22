@@ -1,6 +1,7 @@
 import socket
 import os
 import hashlib
+import time
 
 SEPARATOR = "<SEPARATOR>"
 BUFFER_SIZE = 4096 # send 4096 bytes each time step
@@ -45,6 +46,7 @@ with open(filename, "rb") as f:
         print(l)
         if not bytes_read:
             break
+        time.sleep(0.1)
         s.send(k + bytes_read)
         start+=1
 print('SEND')
