@@ -6,18 +6,16 @@ from datetime import datetime
 
 
 class configure_server:
-    def __init__(self,host = '0.0.0.0', port= 5001):
+    def __init__(self, host='0.0.0.0', port=5001):
         self.SERVER_HOST = str(host)
         self.SERVER_PORT = int(port)
         self.BUFFER_SIZE = 4096
         self.SEPARATOR = "<SEPARATOR>"
         self.s = socket.socket()
         print(self.SERVER_HOST, self.SERVER_PORT)
-        self.s.bind((self.SERVER_HOST,self.SERVER_PORT))
+        self.s.bind((self.SERVER_HOST, self.SERVER_PORT))
         self.s.listen(5)
         print(f"[*] Listening as {self.SERVER_HOST}:{self.SERVER_PORT}")
-
-
 
 
 class server(configure_server):
@@ -32,8 +30,8 @@ class server(configure_server):
         received = client_socket.recv(self.BUFFER_SIZE).decode()
         filename, filesize, self.checksum_from_client = received.split(self.SEPARATOR)
         filename_with_path = 'temp\\' + str(address[1]) + '_' + filename
-
         self.files = []
+
         while True:
             bytes_read = client_socket.recv(self.BUFFER_SIZE)
             if not bytes_read:
@@ -49,7 +47,6 @@ class server(configure_server):
         client_socket.close()
         merge_files_2.merge(self)
         hash_check.md5(self)
-
 
 
 class merge_files_2(server):
@@ -83,7 +80,6 @@ class hash_check(merge_files_2):
             raise ValueError(f'Checksums are not correct.')
 
 
-
 # class merge_files:
 #     @staticmethod
 #     def merge(filename,list_of_files,pos):
@@ -104,27 +100,33 @@ class logs:
     def log_to_fille(messange):
         now = datetime.now()
         current_time = now.strftime("%d.%m.%Y - %H:%M:%S")
-        f= open('log.txt','a+')
-        f.write(current_time +' '+messange)
+        f = open('log.txt', 'a+')
+        f.write(current_time + ' ' + messange)
 
 
 class create_thread():
     @staticmethod
-    def create(clien_socket,adress):
+    def create(clien_socket, adress):
         serv = server()
-        serv.run(clien_socket,adress)
+        serv.run(clien_socket, adress)
 
 
 if __name__ == "__main__":
 
 
-    if(len(sys.argv)==3):
-        A=server(host = str(sys.argv[1]), port = int(sys.argv[2]))
+
+    if (len(sys.argv) > 1):
+        if (str(sys.argv[1]) == '-s'):
+            if (len(sys.argv) == 4):
+                A = server(host=str(sys.argv[2]), port=int(sys.argv[3]))
+            else:
+                A = server()
+            while True:
+                client_socket, address = A.accept()
+                worker = Thread(target=A.run, args=[client_socket, address], daemon=True)
+                worker.start()
+
+        if (str(sys.argv[1]) == '-c'):
+            print('client')
     else:
-        A=server()
-
-    while True:
-        client_socket, address = A.accept()
-        worker = Thread(target=A.run,args=[client_socket,address],daemon=True)
-        worker.start()
-
+        print('No option choose, use parameters to set client (-c) or server (-s) mode')
