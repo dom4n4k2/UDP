@@ -2,9 +2,10 @@ import os
 import random
 import sys
 
+
 if __name__ == "__main__":
     if len(sys.argv)== 3:
-        filename = str(sys.argv[1])
+        filename = 'input_files\\'+str(sys.argv[1])
         print(f'cleaning {filename}')
         f = open(filename, "a+")
         f.close()

@@ -1,11 +1,11 @@
 import socket
 import hashlib
 import sys
-from threading import Thread
-from datetime import datetime
 import os
 import time
 import glob
+from threading import Thread
+from datetime import datetime
 
 
 class configure_server:
@@ -193,8 +193,11 @@ if __name__ == "__main__":
                 logs.log_to_fille(
                     f"Client  number {A.k} STARTS\n")
         if (str(sys.argv[1]) == '-c'):
-            print('client')
-            A = client(host=str(sys.argv[2]), port=int(sys.argv[3]), mode='client', file='input_files\\'+ str(sys.argv[4]))
-            A.run()
+            if (len(sys.argv) == 5):
+                print('client')
+                A = client(host=str(sys.argv[2]), port=int(sys.argv[3]), mode='client', file='input_files\\'+ str(sys.argv[4]))
+                A.run()
+            else:
+                print('Not enought parameters')
     else:
         print('No option choose, use parameters to set client (-c) or server (-s) mode than if -s server_ip port or if -c server_ip port filename')
