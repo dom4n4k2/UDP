@@ -1,5 +1,9 @@
 #UDP
+
+
 ##client_server.py
+
+
 Program has possibility to run in server or client mode. The goal of the program is to transfer files from client to the server.
 ####Libraries used:
 1. socket
@@ -53,6 +57,8 @@ Program has possibility to genererate file filled with random numeric data but o
 
 ####Libraries used:
 1. sys
+
+
 ####Version:
 1. python 3.8 
 
